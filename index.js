@@ -2,9 +2,11 @@ const express = require('express')
 const server = express()
 const port = 3015;
 const routes = require("./routes");
+server.use(express.json());
 server.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "http://127.0.0.1:9292/"); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Credentials", "true");
+  res.header( 'Content-Type', 'application/json');
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
@@ -12,7 +14,7 @@ server.use((req, res, next) => {
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
-      server.use(express.json());
+   
     
       server.use("/", routes);
 //       server.get('/', (req, res) => {

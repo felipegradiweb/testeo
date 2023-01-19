@@ -35,8 +35,9 @@ function getallproducts(req, res, next) {
   function webhook(req, res, next) {
     var state=req.body.customer.state;
     var id_cliente=req.body.customer.id;
-
+console.log('antes',state)
     if(state &&state == 'disabled'){
+      console.log('entro',state)
       const newLocal3 = `https://andresfelipe-gradi-store.myshopify.com/admin/api/2023-01/customers/${id_cliente}/send_invite.json`;
    
       const accessTokenRequestUrl = newLocal3;

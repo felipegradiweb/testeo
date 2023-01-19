@@ -33,23 +33,24 @@ function getallproducts(req, res, next) {
         .catch((res) => next({ status: 404, message: res.response }));
   }
   function webhook(req, res, next) {
-    var state=req.body.customer.state;
-    var id_cliente=req.body.customer.id;
-console.log('antes',state)
-    if(state &&state == 'disabled'){
-      console.log('entro',state)
-      const newLocal3 = `https://andresfelipe-gradi-store.myshopify.com/admin/api/2023-01/customers/${id_cliente}/send_invite.json`;
+    // var state=req.body.customer.state;
+    // var id_cliente=req.body.customer.id;
+console.log('antes',req.body )
+
+     if(req.body.customer.state == 'disabled'){
+    
+      const newLocal3 = `https://andresfelipe-gradi-store.myshopify.com/admin/api/2023-01/customers/${req.body.customer.id}/send_invite.json`;
    
       const accessTokenRequestUrl = newLocal3;
         return axios
-          .post(`${accessTokenRequestUrl}`,{headers:{'X-Shopify-Access-Token':'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'}})
-          .then((response) => response)
-    
-          .then((iddetail) =>console.log(iddetail))
+          .post(`${accessTokenRequestUrl}`,{customer_invite:{custom_message: "My awesome new store"}},{headers:{'X-Shopify-Access-Token':'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'}})
+          .then((response) => {
+            response}).then((iddetail)=>console.log(iddetail.data)
+            )
           .catch((res) => next({ status: 404, message: res.response }));
     }
 
-  }
+   }
   module.exports = {
     getallproducts,getallorders,getallcustomers,webhook
   };

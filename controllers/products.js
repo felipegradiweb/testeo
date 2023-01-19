@@ -37,7 +37,7 @@ function getallproducts(req, res, next) {
     var id_cliente=req.body.customer.id;
 
     if(state &&state == 'disabled'){
-      const newLocal3 = `https://andresfelipe-gradi-store.myshopify.com/admin/api/2022-04/clientes/${id_cliente}/send_invite.json`;
+      const newLocal3 = `https://andresfelipe-gradi-store.myshopify.com/admin/api/2023-01/customers/${id_cliente}/send_invite.json`;
    
       const accessTokenRequestUrl = newLocal3;
         return axios
